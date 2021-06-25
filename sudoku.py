@@ -70,17 +70,17 @@ def solveSudoku(sudokuArr):
             break
     sudokuArr[y][x]=0
 
-def start():
+def start(goText):
+    goText.set("Calculating")
     if(solveSudoku(sudokuArr)):
+        print(sudokuArr)
         drawSudoku(sudokuArr)
 
 def drawSudoku(sudokuArr):
     count = 0
-    print(labels)
     for i in sudokuArr:
         for j in i:
-            #labels[count]['text'] = j
-            print(count)
+            labels[count]['text'] = j
             count = count + 1
 
 def main():
@@ -93,7 +93,6 @@ def main():
         canvas.create_line(0, i*33, 300, i*33)
         canvas.create_line(i*33, 0, i*33, 300)
 
-    labels = []
     for y in range(9):
         for x in range(9):
             label = tk.Label(root, text=str(x) + str(y))
@@ -105,7 +104,7 @@ def main():
     canvas = tk.Canvas(root, width=297, height=100).grid(columnspan=9, rowspan=3)
 
     goText = tk.StringVar()
-    goBtn = tk.Button(root, textvariable=goText, command=lambda:start(), bg="gray", fg="white", width=10, bd=0)
+    goBtn = tk.Button(root, textvariable=goText, command=lambda:start(goText), bg="gray", fg="white", width=10, bd=0)
     goText.set("Go")
     goBtn.grid(column=0, row=9, columnspan=9)
 
